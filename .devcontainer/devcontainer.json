@@ -1,6 +1,8 @@
 {
     "name": "Minecraft Plugin Development",
-    "image": "mcr.microsoft.com/devcontainers/java:17",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
     "customizations": {
         "vscode": {
             "extensions": [
