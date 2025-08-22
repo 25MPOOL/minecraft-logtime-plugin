@@ -1,0 +1,13 @@
+{
+    "name": "Minecraft Plugin Development",
+    "image": "mcr.microsoft.com/devcontainers/java:17",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                // TODO: Add extensions here
+            ]
+        }
+    },
+    "forwardPorts": [25565],
+    "postCreateCommand": "mvn dependency:go-offline"
+}
