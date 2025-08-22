@@ -1,0 +1,11 @@
+name: LogTime
+version: 1.0.0
+main: com.pool25m.logtime.LogTimePlugin
+api-version: '1.21'
+author: 25MPOOL
+
+commands:
+  ranking:
+    description: プレイヤーのログイン時間のランキングを表示します。
+    usage: "/ranking <type|help>"
+    aliases: [rank]

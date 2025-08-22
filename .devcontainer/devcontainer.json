@@ -1,0 +1,16 @@
+{
+    "name": "Minecraft Plugin Development",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "fwcd.kotlin",
+                "vscjava.vscode-java-pack"
+            ]
+        }
+    },
+    "forwardPorts": [25565],
+    "postCreateCommand": "mvn dependency:go-offline"
+}
