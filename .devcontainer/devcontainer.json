@@ -4,7 +4,8 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                // TODO: Add extensions here
+                "fwcd.kotlin",
+                "vscjava.vscode-java-pack"
             ]
         }
     },
