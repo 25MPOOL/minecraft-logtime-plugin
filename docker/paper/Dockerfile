@@ -8,14 +8,18 @@
 FROM eclipse-temurin:21-jre-jammy
 
 # 必要なツールをインストール
-RUN apt-get update && apt-get install -y wget && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y wget curl jq && rm -rf /var/lib/apt/lists/*
 
 # サーバーの作業ディレクトリを作成
 WORKDIR /server
 
 # Paperサーバーの最新ビルドを自動で取得するように修正
 ARG MC_VERSION=1.21
-RUN wget -O paper.jar https://api.papermc.io/v2/projects/paper/versions/${MC_VERSION}/builds/$(wget -qO- https://api.papermc.io/v2/projects/paper/versions/${MC_VERSION} | grep -o '"builds":\[[^]]*' | grep -o '[0-9]*' | tail -1)/downloads/paper-${MC_VERSION}-$(wget -qO- https://api.papermc.io/v2/projects/paper/versions/${MC_VERSION} | grep -o '"builds":\[[^]]*' | grep -o '[0-9]*' | tail -1).jar
+RUN LATEST_BUILD=$(curl -s "https://api.papermc.io/v2/projects/paper/versions/${MC_VERSION}" | jq -r '.builds[-1]') && \
+    wget -O paper.jar "https://api.papermc.io/v2/projects/paper/versions/${MC_VERSION}/builds/${LATEST_BUILD}/downloads/paper-${MC_VERSION}-${LATEST_BUILD}.jar"
+
+# EULAファイルを事前に作成
+RUN echo "eula=true" > eula.txt
 
 # サーバーを起動するコマンド
 # メモリ割り当てはPCのスペックに合わせて調整してください (例: -Xms2G -Xmx2G)
